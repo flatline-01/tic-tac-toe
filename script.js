@@ -1,12 +1,11 @@
 const wrapper = document.querySelector('#wrapper');
 const fields  = document.querySelectorAll('.field');
 
-
 const settingsList = document.getElementById('settings-list');
 
-const icons        = document.querySelectorAll('.icon');
-const closeIcon    = document.querySelector('.close-icon');
-const settingsIcon = document.getElementById('settings-icon');
+const icons          = document.querySelectorAll('.icon');
+const closeIcon      = document.querySelector('.close-icon');
+const settingsIcon   = document.getElementById('settings-icon');
 
 const gameOverWindow  = document.getElementById('gameOverWindow');
 const gameOverMessage = document.getElementById('gameOverWindow-message');
@@ -15,7 +14,8 @@ const restartBtn      = document.getElementById('restart-btn');
 
 const cross  = document.getElementById('cross');
 const circle = document.getElementById('circle');
-
+const crossSVGElems  = [...cross.children[0].children];
+const circleSVGElems  = [...circle.children];
 
 if(!localStorage.getItem('player') && !localStorage.getItem('gameMode')){
     localStorage.setItem('player', 'o');
@@ -52,11 +52,15 @@ function addClassForPlayer(sign, elem){
         elem.classList.add('selected');
         if(sign === 'o'){
             circle.classList.add('player');
+            circleSVGElems.forEach(i => i.classList.add('player'));
             cross.classList.add('enemy');
+            crossSVGElems.forEach(i => i.classList.add('enemy'));
         } 
         else {
             cross.classList.add('player');
+            crossSVGElems.forEach(i => i.classList.add('player'));
             circle.classList.add('enemy');
+            circleSVGElems.forEach(i => i.classList.add('enemy'));
         }
     }
 }
@@ -66,7 +70,7 @@ function toggleSelectedClass(elem, elem2){
         if(elem2 === icons[3]){
             localStorage.setItem('player', 'o');
             localStorage.setItem('enemy', 'x');
-            identifyClasses(circle, cross);
+            identifyClasses(circle, cross, circleSVGElems, crossSVGElems);
         }
         elem.classList.remove('selected');
         elem2.classList.add('selected');
@@ -75,7 +79,7 @@ function toggleSelectedClass(elem, elem2){
         if(elem === icons[2]){
             localStorage.setItem('player', 'x');
             localStorage.setItem('enemy', 'o');
-            identifyClasses(cross, circle);
+            identifyClasses(cross, circle, crossSVGElems, circleSVGElems);
         }
         if(elem === icons[0]){
             localStorage.setItem('gameMode', playWithPerson.toString());
@@ -90,17 +94,20 @@ function toggleSelectedClass(elem, elem2){
     });
 }
 
-function identifyClasses(el, el2){
+function identifyClasses(el, el2, children, children2){
     if(el.classList.contains('enemy')){
         el.classList.remove('enemy');
+        children.forEach(i => i.classList.remove('enemy'));
     }
     if(el2.classList.contains('player')){
         el2.classList.remove('player');
+        children2.forEach(i => i.classList.remove('player'));
     }
     el.classList.add('player');
-    el2.classList.add('enemy')
+    children.forEach(i => i.classList.add('player'));
+    el2.classList.add('enemy');
+    children2.forEach(i => i.classList.add('enemy'));
 }
-
 function playWithPerson(){
     let  count = 0;
 
@@ -156,7 +163,7 @@ function playWithComputer(){
             checkWinner('x');
             checkWinner('o');
 
-            }, 300);
+            }, 200);
            
         });
 }

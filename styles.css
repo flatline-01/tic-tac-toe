@@ -1,11 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 :root{
-    --main-bg-color: mediumslateblue;
+    --main-bg-color: #7b68ee;
     --main-bg-color-hover: rgb(96, 80, 185);
     --main-bg-color-focus: rgb(82, 67, 165);
     --main-text-color: #fff;
     --pop-up-window-bg: midnightblue;
     --grid-color: rgb(4, 57, 155);
+    --player-color: rgb(15, 172, 15);
+    --enemy-color: rgba(235, 23, 23, 0.979);
 }
 *{
     margin: 0;
@@ -64,10 +66,12 @@ li, .icon, #gameOverWindow{
 
 
 .player{
-    color: rgb(15, 172, 15);
+    fill:  var(--player-color);
+    color: var(--player-color);
 }
 .enemy{
-    color: rgba(235, 23, 23, 0.979);
+    fill: var(--enemy-color);
+    color: var(--enemy-color);
 }
 
 .hidden{
@@ -85,17 +89,13 @@ li, .icon, #gameOverWindow{
 }
 .icon{
     font-size: 6em;
-    width: 20%;
+    width: 128px;
     border-radius: 50%;
     margin: 2% 5%;
     text-align: center;
-    background-color: var(--main-bg-color);
 }
 .icon:hover{
-    background-color: var(--main-bg-color-hover);
-}
-.icon:focus{
-    background-color: var(--main-bg-color-focus);
+    fill: var(--main-bg-color-hover);
 }
 
 #settings{
@@ -110,14 +110,12 @@ li, .icon, #gameOverWindow{
     top: 100%;
     left: 80%;
 }
-#settings-icon:hover{
-    animation: settings-icon-anim 3s linear infinite;
-}
-#settings-icon-bg{
+#settings-icon-bg, .icon{
     fill: var(--main-bg-color);
 }
-#settings-icon-bg:hover{
-    fill: var(--main-bg-color-hover);
+
+#settings-icon:hover{
+    animation: settings-icon-anim 3s linear infinite;
 }
 
 @keyframes settings-icon-anim{
@@ -125,7 +123,6 @@ li, .icon, #gameOverWindow{
     50%{transform: rotate(90deg);}
     100%{transform: rotate(180deg);}
 }
-
 
 #gameOverWindow, #settings-list{
     background-color: var(--pop-up-window-bg);
@@ -138,6 +135,9 @@ li, .icon, #gameOverWindow{
     left: 38%;
     width: 20%;
 }
+.gameOverWindow-btn, .icon{
+    background-color: var(--main-bg-color);
+}
 #gameOverWindow-btns{
     margin-top: 5%;
     display: flex;
@@ -146,13 +146,12 @@ li, .icon, #gameOverWindow{
 .gameOverWindow-btn{
     padding: 2%;
     width: 30%;
-    background-color: var(--main-bg-color);
     border-radius: 30px;
 }
-.gameOverWindow-btn:hover{
+.gameOverWindow-btn:hover, .icon:hover{
     background-color: var(--main-bg-color-hover);
 }
-.gameOverWindow-btn:focus{
+.gameOverWindow-btn:focus, .icon:focus{
    outline: none;
    background-color: var(--main-bg-color-focus);
 }
