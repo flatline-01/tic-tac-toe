@@ -9,17 +9,6 @@ const winCombos = [
     [0, 4, 8]
 ];
 
-callGameMode(playWithAIHard.toString(), icons[1]);
-callGameMode(playWithPerson.toString(), icons[0]);
-
-function callGameMode(func, elem){
-    if(localStorage.getItem('gameMode') === func){
-        elem.classList.add('selected');
-        let play = eval('(' + localStorage.getItem('gameMode') + ')');
-        play();
-    }
-}
-
 function playWithPerson(){
     let  count = 0;
 

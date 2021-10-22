@@ -17,6 +17,17 @@ const circle = document.getElementById('circle');
 const crossSVGElems  = [...cross.children[0].children];
 const circleSVGElems  = [...circle.children];
 
+callGameMode(playWithAIHard.toString(), icons[1]);
+callGameMode(playWithPerson.toString(), icons[0]);
+
+function callGameMode(func, elem){
+    if(localStorage.getItem('gameMode') === func){
+        elem.classList.add('selected');
+        let play = eval('(' + localStorage.getItem('gameMode') + ')');
+        play();
+    }
+}
+
 if(!localStorage.getItem('player') && !localStorage.getItem('gameMode')){
     localStorage.setItem('player', 'o');
     localStorage.setItem('enemy', 'x');
