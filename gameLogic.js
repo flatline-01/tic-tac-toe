@@ -1,3 +1,6 @@
+const field = document.querySelector('#field');
+const cells  = document.querySelectorAll('.cell');
+
 const winCombos = [
     [0, 1, 2],
     [3, 4, 5],
@@ -10,125 +13,123 @@ const winCombos = [
 ];
 
 function playWithPerson(){
+    
     let  count = 0;
 
-    wrapper.onclick = function(e){
-        if(e.target.classList.contains('field')){
-            if(count % 2 === 0){
-                move(e.target, localStorage.getItem('player'), 'player'); 
-                count+=1;
+    if(field){
+        field.onclick = function(e){
+            if(e.target.classList.contains('cell')){
+                if(count % 2 === 0){
+                    move(e.target, localStorage.getItem('player'), 'player'); 
+                    count+=1;
+                }
+                else{
+                    move(e.target, localStorage.getItem('enemy'), 'enemy'); 
+                    count+=1;
+                }
+    
+                checkWinner('x');
+                checkWinner('o');
             }
-            else{
-                move(e.target, localStorage.getItem('enemy'), 'enemy'); 
-                count+=1;
-            }
-
-            checkWinner('x');
-            checkWinner('o');
         }
     }
 }
 
 function playWithAIEasy(){
+
     let setOfNums = new Set();
-    wrapper.onclick = function(e){
-        if(e.target.classList.contains('field')){
-            move(e.target, localStorage.getItem('player'), 'player');
-        }
-            checkWinner('x');
-            checkWinner('o');
-    }
-    wrapper.addEventListener("mouseup", function() {
+    
+    palyerMove();
 
-        let random = getRandomNum(setOfNums.size - 2);
+    if(field){
+        field.addEventListener('mouseup', function() {
 
-        setTimeout(() => {
-
-            for(let i = 0; i < fields.length; i++){
-                if(fields[i].innerHTML === ''){
-                setOfNums.add(+fields[i].id.slice(2));
+            let random = getRandomNum(setOfNums.size - 2);
+    
+            setTimeout(() => {
+    
+                for(let i = 0; i < cells.length; i++){
+                    if(cells[i].innerHTML === ''){
+                    setOfNums.add(+cells[i].id.slice(2));
+                    }
+                    else{
+                        setOfNums.delete(+cells[i].id.slice(2));
+                    }
+                }
+    
+                if(random >=  setOfNums.size){
+                    random = random -2;
+                    move(cells[[...setOfNums][random]],localStorage.getItem('enemy'), 'enemy');
                 }
                 else{
-                    setOfNums.delete(+fields[i].id.slice(2));
+                    move(cells[[...setOfNums][random]],localStorage.getItem('enemy'), 'enemy');
                 }
-            }
-
-            if(random >=  setOfNums.size){
-                random = random -2;
-                move(fields[[...setOfNums][random]],localStorage.getItem('enemy'), 'enemy');
-            }
-            else{
-                move(fields[[...setOfNums][random]],localStorage.getItem('enemy'), 'enemy');
-            }
-
-        checkWinner('x');
-        checkWinner('o');
-
-        }, 200);
-        
-    });
+    
+            checkWinner('x');
+            checkWinner('o');
+    
+            }, 200);
+            
+        });
+    }
 }
 
 function playWithAIHard(){
-
-    wrapper.onclick = function(e){
-        if(e.target.classList.contains('field')){
-            move(e.target, localStorage.getItem('player'), 'player');
-        }
-            checkWinner('x');
-            checkWinner('o');
-    } 
+   
+    palyerMove();
 
     let AIGameTacticNum = getRandomNum(winCombos.length);
 
-    wrapper.addEventListener("mouseup", function() {
-        setTimeout(() => {
-            if(document.getElementById('id' + winCombos[AIGameTacticNum][0]).textContent == ''){
-                    move(fields[winCombos[AIGameTacticNum][0]],localStorage.getItem('enemy'), 'enemy');
-            } 
-            else if(document.getElementById('id' + winCombos[AIGameTacticNum][1]).textContent == ''){
-                if(checkIfSomeoneWins(localStorage.getItem('player'))){
-                    move(fields[checkIfSomeoneWins(localStorage.getItem('player'))], localStorage.getItem('enemy'), 'enemy');
+    if(field){
+        field.addEventListener("mouseup", function() {
+            setTimeout(() => {
+                if(document.getElementById('id' + winCombos[AIGameTacticNum][0]).textContent === ''){
+                        move(cells[winCombos[AIGameTacticNum][0]],localStorage.getItem('enemy'), 'enemy');
                 } 
-                else if(checkIfSomeoneWins(localStorage.getItem('enemy'))){
-                    move(fields[checkIfSomeoneWins(localStorage.getItem('enemy'))], localStorage.getItem('enemy'), 'enemy');
+                else if(document.getElementById('id' + winCombos[AIGameTacticNum][1]).textContent === ''){
+                    if(checkIfSomeoneWins(localStorage.getItem('player'))){
+                        move(cells[checkIfSomeoneWins(localStorage.getItem('player'))], localStorage.getItem('enemy'), 'enemy');
+                    } 
+                    else if(checkIfSomeoneWins(localStorage.getItem('enemy'))){
+                        move(cells[checkIfSomeoneWins(localStorage.getItem('enemy'))], localStorage.getItem('enemy'), 'enemy');
+                    }
+                    else {
+                        move(cells[winCombos[AIGameTacticNum][1]],localStorage.getItem('enemy'), 'enemy');
+                    }
+                }
+                else if(document.getElementById('id' + winCombos[AIGameTacticNum][2]).textContent == ''){
+                    if(checkIfSomeoneWins(localStorage.getItem('player'))){
+                        move(cells[checkIfSomeoneWins(localStorage.getItem('player'))], localStorage.getItem('enemy'), 'enemy');
+                    }
+                    else if(checkIfSomeoneWins(localStorage.getItem('enemy'))){
+                        move(cells[checkIfSomeoneWins(localStorage.getItem('enemy'))], localStorage.getItem('enemy'), 'enemy');
+                    }
+                    else {
+                        move(cells[winCombos[AIGameTacticNum][2]],localStorage.getItem('enemy'), 'enemy');
+                    }
                 }
                 else {
-                    move(fields[winCombos[AIGameTacticNum][1]],localStorage.getItem('enemy'), 'enemy');
-                }
-            }
-            else if(document.getElementById('id' + winCombos[AIGameTacticNum][2]).textContent == ''){
-                if(checkIfSomeoneWins(localStorage.getItem('player'))){
-                    move(fields[checkIfSomeoneWins(localStorage.getItem('player'))], localStorage.getItem('enemy'), 'enemy');
-                }
-                else if(checkIfSomeoneWins(localStorage.getItem('enemy'))){
-                    move(fields[checkIfSomeoneWins(localStorage.getItem('enemy'))], localStorage.getItem('enemy'), 'enemy');
-                }
-                else {
-                    move(fields[winCombos[AIGameTacticNum][2]],localStorage.getItem('enemy'), 'enemy');
-                }
-            }
-            else {
-                if(checkIfSomeoneWins(localStorage.getItem('player'))){
-                    move(fields[checkIfSomeoneWins(localStorage.getItem('player'))], localStorage.getItem('enemy'), 'enemy');
-                }
-                else if(checkIfSomeoneWins(localStorage.getItem('enemy'))){
-                    move(fields[checkIfSomeoneWins(localStorage.getItem('enemy'))], localStorage.getItem('enemy'), 'enemy');
-                } else {
-                    for(let item of [...fields]){
-                        if(item.innerHTML == ''){
-                            move(fields[item.id.slice(2)], localStorage.getItem('enemy'), 'enemy');
-                            break;
+                    if(checkIfSomeoneWins(localStorage.getItem('player'))){
+                        move(cells[checkIfSomeoneWins(localStorage.getItem('player'))], localStorage.getItem('enemy'), 'enemy');
+                    }
+                    else if(checkIfSomeoneWins(localStorage.getItem('enemy'))){
+                        move(cells[checkIfSomeoneWins(localStorage.getItem('enemy'))], localStorage.getItem('enemy'), 'enemy');
+                    } else {
+                        for(let item of [...cells]){
+                            if(item.innerHTML == ''){
+                                move(cells[item.id.slice(2)], localStorage.getItem('enemy'), 'enemy');
+                                break;
+                            }
                         }
                     }
                 }
-            }
-            
-            checkWinner('x');
-            checkWinner('o');
-
-        }, 200);
-    });
+                
+                checkWinner('x');
+                checkWinner('o');
+    
+            }, 200);
+        });
+    }
 }
 
 function move(elem, sign, className){
@@ -146,42 +147,17 @@ function getRandomNum(num){
 }
 
 function checkWinner(sign){
-    if(fields[0].innerHTML === sign && fields[1].innerHTML === sign && fields[2].innerHTML === sign){
-       gameOver(sign);
-       return;
-    }
-    else if(fields[3].innerHTML === sign && fields[4].innerHTML === sign && fields[5].innerHTML === sign){
-        gameOver(sign);
-        return;
-    }
-    else if(fields[6].innerHTML === sign && fields[7].innerHTML === sign && fields[8].innerHTML === sign){
-        gameOver(sign);
-        return;
-    }
-
-    else if(fields[0].innerHTML === sign && fields[3].innerHTML === sign && fields[6].innerHTML === sign){
-        gameOver(sign);
-        return;
-    }
-    else if(fields[1].innerHTML === sign && fields[4].innerHTML === sign && fields[7].innerHTML === sign){
-        gameOver(sign);
-        return;
-    }
-    else if(fields[2].innerHTML === sign && fields[5].innerHTML === sign && fields[8].innerHTML === sign){
-        gameOver(sign);
-        return;
-    }
-    else if(fields[0].innerHTML === sign && fields[4].innerHTML === sign && fields[8].innerHTML === sign){
-        gameOver(sign);
-        return;
-    }
-    else if(fields[2].innerHTML === sign && fields[4].innerHTML === sign && fields[6].innerHTML === sign){
-        gameOver(sign);
-        return;
-    }
-    else if(fields[0].textContent !== '' && fields[1].textContent !== '' && fields[2].textContent !== '' && fields[3].textContent !== '' &&fields[4].textContent !== '' && fields[5].textContent !== '' && fields[6].textContent !== '' && fields[7].textContent !== '' && fields[8].textContent !== ''){
-        gameOver();
-        return;
+    for(let i = 0 ;  i < winCombos.length; i++){
+        console.log(winCombos[i]);
+        let a = document.getElementById('id' + winCombos[i][0]);
+        let b = document.getElementById('id' + winCombos[i][1]);
+        let c = document.getElementById('id' + winCombos[i][2]);
+        if(a.innerHTML === sign && b.innerHTML === sign & c.innerHTML === sign){
+            gameOver(sign);
+        }
+        else if(cells[0].textContent !== '' && cells[1].textContent !== '' && cells[2].textContent !== '' && cells[3].textContent !== '' && cells[4].textContent !== '' && cells[5].textContent !== '' && cells[6].textContent !== '' && cells[7].textContent !== '' && cells[8].textContent !== ''){
+            gameOver();
+        }
     }
 }
 
@@ -206,16 +182,24 @@ function checkIfSomeoneWins(sign){
         let b = document.getElementById('id' + winCombos[i][1]);
         let c = document.getElementById('id' + winCombos[i][2]);
         if(a.innerHTML == sign && b.innerHTML == sign && c.innerHTML == ''){
-            console.log(c.id.slice(2));
             return c.id.slice(2);
         } else if(a.innerHTML == sign && c.innerHTML == sign && b.innerHTML == ''){
-            console.log(b.id.slice(2));
             return b.id.slice(2);
-        } else if(b.innerHTML == sign && c.innerHTML == sign && a.innerHTML == ''){
-            console.log(a.id.slice(2));
+        } 
+        else if(b.innerHTML == sign && c.innerHTML == sign && a.innerHTML == ''){
             return a.id.slice(2);
-        } else {
-            console.log(null);
         }
+    }
+}
+
+function palyerMove(){
+    if(field){
+        field.onclick = function(e){
+            if(e.target.classList.contains('cell')){
+                move(e.target, localStorage.getItem('player'), 'player');
+            }
+                checkWinner('x');
+                checkWinner('o');
+        } 
     }
 }

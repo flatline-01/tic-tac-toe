@@ -1,0 +1,55 @@
+.settings__list, #settings{ 
+    justify-content: space-evenly;
+}
+.settings__list{
+    width: 100%;
+    font-family: "Tourney";
+    font-size: 2em;
+    font-weight: bold;
+}
+.settings__title{
+    color: var(--white-color);
+    text-shadow:
+        0 0 7px var(--white-color),
+        0 0 10px var(--white-color),
+        0 0 21px var(--white-color),
+        0 0 42px var(--red-color),
+        0 0 82px var(--red-color),
+        0 0 92px var(--red-color),
+        0 0 102px var(--red-color);
+}
+.settings__list__item:hover, #menuLink, #settings-icon:hover, #settings-icon{
+    color: var(--white-color);
+    text-shadow:
+        0 0 7px var(--white-color),
+        0 0 10px var(--white-color),
+        0 0 21px var(--white-color),
+        0 0 42px var(--blue-color),
+        0 0 82px var(--blue-color),
+        0 0 92px var(--blue-color),
+        0 0 102px var(--blue-color),
+        0 0 151px var(--blue-color);
+}
+#settings{
+    background-color: var(--black-color);
+    z-index: 3;
+    flex-direction: column;
+    position: absolute;
+    text-align: center;
+    width: 85vw;
+    height: 100vh;
+    top: 0;
+    align-self: center;
+}
+#settings-icon{
+    top: 5%;
+    left: 0;
+    color: rgb(66, 65, 65);
+    font-size: 50px;
+}
+
+@media screen and (max-width: 500px){
+    .settings__list{
+        font-size: 1.4em;
+    }
+}

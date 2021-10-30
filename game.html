@@ -3,28 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
-    <link rel="stylesheet" href="./styles/general.css">
-    <link rel="stylesheet" href="./styles/menu.css">
-    <link rel="stylesheet" href="./styles/settings.css">
+    <link rel="stylesheet" href="styles/general.css">
+    <link rel="stylesheet" href="styles/settings.css">
+    <link rel="stylesheet" href="styles/game.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="tic-tac-toe, tic-tac-toe game, browser game">
+    <meta name="descirption" content="Just a game of tic-tac-toe. You can play both with the computer and with your friends.">
     <title>Tic-tac-toe</title>
 </head>
 <body>
-    <div class="container">
-        <section class="main-title">
-            <h1><span>TIC</span>-<span>TAC</span>-<span id="toe">TOE</span></h1>
-        </section>
-        <section>
-            <ul class="buttons-list">
-                <li>
-                    <button id="settingsBtn" class="btn settings-btn">SETTINGS</button>
-                </li>
-                <li>
-                    <a href="game.html" id="playBtn" class="btn">PLAY</a>
-                </li>
-            </ul>
-        </section>
+    <div class='container'>
+        <span class="material-icons settings-btn" id="settings-icon">settings</span>
         <section id="settings" class="hidden">
             <span class="material-icons close-icon">chevron_left</span>
             <h3 class="settings__title">Game Mod</h3>
@@ -42,6 +32,25 @@
                 <li class="settings__list__item" id="circle" title="play for o"><span class="material-icons">radio_button_unchecked</span></li>
                 <li class="settings__list__item" id="cross" title="play for x"><span class="material-icons">close</span></li>
             </ul>
+            <a href="index.html" id="menuLink">BACK TO MENU</a>
+        </section>
+        <dialog id="gameOverWindow">
+            <p id='gameOverWindow-message'></p>
+            <div id="gameOverWindow-btns">
+                <button class="gameOverWindow-btn" id="restart-btn">restart</button>
+                <a class="gameOverWindow-btn" href="./index.html">menu</a>
+            </div>   
+        </dialog>
+        <section id="field">
+            <div class="cell noBorderTop noBorderLeft" id="id0"></div>
+            <div class="cell noBorderTop" id="id1"></div>
+            <div class="cell noBorderTop noBorderRight" id="id2"></div>
+            <div class="cell noBorderLeft" id="id3"></div>
+            <div class="cell" id="id4"></div>
+            <div class="cell noBorderRight" id="id5"></div>
+            <div class="cell noBorderBottom noBorderLeft" id="id6"></div>
+            <div class="cell noBorderBottom" id="id7"></div>
+            <div class="cell noBorderBottom noBorderRight" id="id8"></div>
         </section>
     </div>
     <script src="./gameLogic.js"></script>

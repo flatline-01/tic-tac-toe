@@ -1,0 +1,81 @@
+.main-title{
+    font-size: 2.5em;
+    font-family: "Yellowtail";
+    text-shadow:
+        0 0 7px var(--white-color),
+        0 0 10px var(--white-color),
+        0 0 21px var(--white-color),
+        0 0 42px var(--red-color),
+        0 0 82px var(--red-color),
+        0 0 92px var(--red-color),
+        0 0 102px var(--red-color);
+}
+#toe{
+    animation: flicker 3.5s infinite alternate;
+}
+#settingsBtn{
+    text-shadow:
+      0 0 7px var(--white-color),
+      0 0 10px var(--white-color),
+      0 0 21px var(--white-color),
+      0 0 42px var(--green-color),
+      0 0 82px var(--green-color),
+      0 0 92px var(--green-color),
+      0 0 102px var(--green-color),
+      0 0 151px var(--green-color);
+    box-shadow: rgba(52, 168, 16, 0.4) 0px 0px 0px 2px, rgba(79, 192, 13, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+#settingsBtn:hover{
+    background-color: var(--green-color);
+    box-shadow: rgba(52, 168, 16, 0.4) 0px 4px 16px, rgba(79, 192, 13, 0.65) 0px 8px 24px, rgba(84, 216, 51, 0.1) 0px 16px 56px;
+}
+#playBtn{
+    text-shadow:  
+      0 0 7px var(--white-color),
+      0 0 10px var(--white-color),
+      0 0 21px var(--white-color),
+      0 0 42px var(--blue-color),
+      0 0 82px var(--blue-color),
+      0 0 92px var(--blue-color),
+      0 0 102px var(--blue-color),
+      0 0 151px var(--blue-color);
+    box-shadow: rgba(16, 28, 197, 0.4) 0px 0px 0px 2px, rgba(18, 60, 199, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;  
+}
+#playBtn:hover{
+    background-color: var(--blue-color);
+    box-shadow: rgba(16, 43, 197, 0.4) 0px 4px 16px, rgba(18, 30, 199, 0.65) 0px 8px 24px, rgba(51, 54, 216, 0.1) 0px 16px 56px;
+}
+.btn{
+    margin-top: 15%;
+    font-size: 1.3em;
+    width: 120%;
+    padding: 2%;
+    color: var(--white-color);
+    background-color: var(--black-color);
+    border: none;
+}
+
+@keyframes flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    text-shadow:
+        0 0 7px var(--white-color),
+        0 0 10px var(--white-color),
+        0 0 21px var(--white-color),
+        0 0 42px var(--red-color),
+        0 0 82px var(--red-color),
+        0 0 92px var(--red-color),
+        0 0 102px var(--red-color);
+    }
+    20%, 24%, 55% {        
+        text-shadow: none;
+    }    
+  }
+
+@media screen and (max-width: 800px){
+    .main-title{
+        font-size: 2em;
+    }
+    .container{
+        flex-direction: row;
+    }
+}

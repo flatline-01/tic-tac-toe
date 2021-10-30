@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Tourney:wght@100&display=swap');
+
+.container{
+    position: relative;
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.gameOverWindow-btn, #gameOverWindow{
+    border: none;
+}
+#field{
+    width: 450px;
+    height: 450px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    font-weight: bold;
+    font-family: "Tourney";
+}
+.cell{
+    text-align: center;
+    font-size: 3.5em;
+    border: 2px solid var(--white-color);
+}
+.noBorderTop{
+    border-top: none;
+}
+.noBorderBottom{
+    border-bottom: none;
+}
+.noBorderRight{
+    border-right: none;
+}
+.noBorderLeft{
+    border-left: none;
+}
+
+.enemy{
+    text-shadow:
+        0 0 7px var(--white-color),
+        0 0 10px var(--white-color),
+        0 0 21px var(--white-color),
+        0 0 42px var(--red-color),
+        0 0 82px var(--red-color),
+        0 0 92px var(--red-color),
+        0 0 102px var(--red-color);
+}
+
+#gameOverWindow, .gameOverWindow-btn{
+    padding: 2%;
+    color: var(--white-color);
+    font-size: 1em;
+}
+
+#gameOverWindow{
+    background-color: var(--gameOverWindow-bg);
+    text-align: center;
+    position: absolute;
+    border-radius: 10px;
+    left: 20%;
+    width: 50%; 
+    height: 20vh;
+}
+
+.gameOverWindow-btn{
+    width: 30%;
+    border: 1px solid var(--white-color);
+    background-color: var(--gameOverWindow-btn);
+    box-shadow: 
+        0 0 7px var(--white-color),
+        0 0 10px var(--white-color),
+        0 0 21px var(--white-color),
+        0 0 42px var(--blue-color),
+        0 0 82px var(--blue-color),
+        0 0 92px var(--blue-color),
+        0 0 102px var(--blue-color),
+        0 0 151px var(--blue-color);
+    text-shadow:  
+        0 0 7px var(--white-color),
+        0 0 10px var(--white-color),
+        0 0 21px var(--white-color),
+        0 0 42px var(--blue-color),
+        0 0 82px var(--blue-color),
+        0 0 92px var(--blue-color),
+        0 0 102px var(--blue-color),
+        0 0 151px var(--blue-color);
+}
+
+#gameOverWindow-btns{
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.gameOverWindow-btn:hover{
+    border: 5px double #fff;
+}
+
+@media screen and (min-height: 500px) and (max-width: 700px){
+    #field{
+        margin-top: 30%;
+    }
+    #gameOverWindow{
+        left: 10%;
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 700px){
+    .container{
+        width: 130vw;
+        padding: 5%;
+    }
+}
