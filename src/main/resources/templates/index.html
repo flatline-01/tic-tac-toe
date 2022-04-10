@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
-    <link rel="stylesheet" href="./styles/general.css">
-    <link rel="stylesheet" href="./styles/menu.css">
-    <link rel="stylesheet" href="./styles/settings.css">
+    <link rel="stylesheet" th:href="@{/css/general.css}">
+    <link rel="stylesheet" th:href="@{/css/menu.css}">
+    <link rel="stylesheet" th:href="@{/css/settings.css}">
     <title>Tic-tac-toe</title>
 </head>
 <body>
@@ -21,7 +23,7 @@
                     <button id="settingsBtn" class="btn settings-btn">SETTINGS</button>
                 </li>
                 <li>
-                    <a href="game.html" id="playBtn" class="btn">PLAY</a>
+                    <a href="/game" id="playBtn" class="btn">PLAY</a>
                 </li>
             </ul>
         </section>
@@ -44,7 +46,7 @@
             </ul>
         </section>
     </div>
-    <script src="./gameLogic.js"></script>
-    <script src="./script.js"></script>
+    <script th:src="@{/js/gameLogic.js}"></script>
+    <script th:src="@{/js/script.js}"></script>
 </body>
 </html>
